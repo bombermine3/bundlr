@@ -73,3 +73,4 @@ update)
 	cd $HOME/bundlr
 	git pull origin master && git submodule update --init --recursive && docker-compose up -d
 	;;
+esac
