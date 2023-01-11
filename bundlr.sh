@@ -44,12 +44,13 @@ EOF
 	echo "Запросите токены из крана https://bundlr.network/faucet"
 	echo "Адрес: ${ADDRESS}"
 
-	read -p "\nНажмите Enter для проверки баланса"
+	read -p "Нажмите Enter для проверки баланса"
  	
 	BALANCE=0
 	while [ "$BALANCE" == "0" ] 
 	do
 		BALANCE=$(testnet-cli balance $ADDRESS 2>&1 | grep -oP "Balance of address (.*) - \K\d+")
+		echo "Баланс: ${BALANCE}"
 		sleep 5
 	done
 
