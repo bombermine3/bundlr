@@ -43,21 +43,12 @@ EOF
 	ADDRESS=$(cargo run --bin wallet-tool show-address --wallet ./wallet.json 2>/dev/null | jq .address | tr -d '"')
 	echo "Запросите токены из крана https://bundlr.network/faucet"
 	echo "Адрес: ${ADDRESS}"
+	
+	echo "После получения токенов следуйте гайду"
 
-	read -p "Нажмите Enter для проверки баланса"
- 	
-	BALANCE=0
-	while [ "$BALANCE" == "0" ] 
-	do
-		BALANCE=$(testnet-cli balance $ADDRESS 2>&1 | grep -oP "Balance of address (.*) - \K\d+")
-		echo "Баланс: ${BALANCE}"
-		sleep 5
-	done
+	#docker-compose up -d
+	#testnet-cli join RkinCLBlY4L5GZFv8gCFcrygTyd5Xm91CzKlR6qxhKA -w ./wallet.json -u "http://$(curl -s ifconfig.me):42069" -s 25000000000000
 
-	docker-compose up -d
-	testnet-cli join RkinCLBlY4L5GZFv8gCFcrygTyd5Xm91CzKlR6qxhKA -w ./wallet.json -u "http://$(curl -s ifconfig.me):42069" -s 25000000000000
-
-	echo "Установка завершена"	
 	;;
 
 uninstall)
